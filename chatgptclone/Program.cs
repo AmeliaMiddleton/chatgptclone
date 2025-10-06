@@ -62,11 +62,11 @@ namespace ChatGPTClone
         // Main entry point of the application
         static async Task Main(string[] args)
         {
-            // Create configuration builder to read from appsettings.json
+            // Create configuration builder to read from secret.json first, then appsettings.json
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()) // Set current directory as base path
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true); // Load JSON config file
-            
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // Load main config file
+            .AddUserSecrets<Program>();
             // Build the configuration object
             configuration = builder.Build();
 
