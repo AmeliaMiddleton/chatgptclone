@@ -19,8 +19,8 @@ A simple **Python** console “ChatGPT clone” that sends your messages to the 
 
 ## Project Structure
 
-- `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py` — main application + API call + history persistence
-- `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/appsettings.json` — non-secret defaults (model, max tokens, temperature, history settings)
+- `chatgptclone/main.py` — main application + API call + history persistence
+- `chatgptclone/appsettings.json` — non-secret defaults (model, max tokens, temperature, history settings)
 
 ## Prerequisites
 
@@ -35,14 +35,14 @@ A simple **Python** console “ChatGPT clone” that sends your messages to the 
    export OPENAI_API_KEY="your_api_key_here"
    ```
 
-2. (Optional) Update `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/appsettings.json`.
+2. (Optional) Update `chatgptclone/appsettings.json`.
 
 ## Run
 
-From `/tmp/workspace/AmeliaMiddleton/chatgptclone`:
+From the repository root:
 
 ```bash
-python3 /tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py
+python3 chatgptclone/main.py
 ```
 
 ## Test Mode
@@ -50,5 +50,5 @@ python3 /tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py
 Pass a single message argument to run once and exit:
 
 ```bash
-python3 /tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py "Hello"
+python3 chatgptclone/main.py "Hello"
 ```

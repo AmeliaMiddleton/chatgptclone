@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
 from urllib import error, request
@@ -66,8 +67,8 @@ async def save_conversation_history() -> None:
 
 def get_ai_response() -> str:
     api_key = config["OpenAI"]["ApiKey"]
-    if not api_key or api_key == "InsertAPIKeyInsecrets_json":
-        raise RuntimeError("OpenAI API key not found. Set OPENAI_API_KEY or OpenAI.ApiKey in appsettings.json")
+    if not api_key or api_key == "your-api-key-here":
+        raise RuntimeError("OpenAI API key not found. Set OPENAI_API_KEY or OpenAI.ApiKey in appsettings JSON")
 
     max_history_messages = config["App"]["MaxHistoryMessages"]
     messages = conversation_history[-max_history_messages:]
@@ -84,7 +85,7 @@ def get_ai_response() -> str:
         "https://api.openai.com/v1/chat/completions",
         data=body,
         headers={
-            "Authorization": "Bearer " + api_key,
+            "Authorization": "{} {}".format("Bearer", api_key),
             "Content-Type": "application/json",
         },
         method="POST",
@@ -130,8 +131,6 @@ async def main() -> None:
 
     print("ChatGPT Clone - Type 'exit' to quit, 'clear' to clear history")
     print("================================================")
-
-    import sys
 
     if len(sys.argv) > 1:
         await process_test_message(sys.argv[1])
