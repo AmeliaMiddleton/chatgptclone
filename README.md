@@ -1,6 +1,6 @@
-# ChatGPT Clone (Console App) — .NET 8
+# ChatGPT Clone (Console App) — Python
 
-A simple **C#/.NET 8** console “ChatGPT clone” that sends your messages to the OpenAI API and prints the assistant response back in the terminal. It also saves a local conversation log so your chat history can persist between runs.
+A simple **Python** console “ChatGPT clone” that sends your messages to the OpenAI API and prints the assistant response in the terminal. It also saves a local conversation log so your chat history can persist between runs.
 
 ## Features
 
@@ -10,32 +10,45 @@ A simple **C#/.NET 8** console “ChatGPT clone” that sends your messages to t
 - Uses OpenAI **Chat Completions** endpoint (`/v1/chat/completions`)
 - Maintains a rolling in-memory history (configurable limit) to provide conversation context
 - Saves conversation history to a JSON file (default: `conversation_history.json`)
-- Configuration via **.NET User Secrets** (recommended for API key)
+- Configuration via `appsettings.json` plus `OPENAI_API_KEY` environment variable
 
 ## Tech Stack
 
-- .NET **8.0** console application
-- `HttpClient` for API requests
-- `Microsoft.Extensions.Configuration` (+ UserSecrets)
-- `Newtonsoft.Json` for JSON serialization
+- Python 3.10+
+- Standard library only (`urllib`, `json`, `asyncio`, `pathlib`)
 
 ## Project Structure
 
-- `chatgptclone/Program.cs` — main application + request/response models + history persistence
-- `chatgptclone/appsettings.json` — non-secret defaults (model, max tokens, temperature, history settings)
-- `chatgptclone/chatgptclone.csproj` — project file targeting `net8.0`
-- `chatgptclone.sln` — solution file
+- `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py` — main application + API call + history persistence
+- `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/appsettings.json` — non-secret defaults (model, max tokens, temperature, history settings)
 
 ## Prerequisites
 
-- .NET SDK 8 installed
+- Python 3.10+
 - An OpenAI API key
 
-## Setup (Recommended: User Secrets)
+## Setup
 
-This project is configured to load secrets using `AddUserSecrets<Program>()`.
+1. Set your OpenAI key as an environment variable:
 
-1. Open a terminal in the project folder that contains `chatgptclone.csproj`
-2. Initialize user secrets (if needed):
    ```bash
-   dotnet user-secrets init
+   export OPENAI_API_KEY="your_api_key_here"
+   ```
+
+2. (Optional) Update `/tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/appsettings.json`.
+
+## Run
+
+From `/tmp/workspace/AmeliaMiddleton/chatgptclone`:
+
+```bash
+python3 /tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py
+```
+
+## Test Mode
+
+Pass a single message argument to run once and exit:
+
+```bash
+python3 /tmp/workspace/AmeliaMiddleton/chatgptclone/chatgptclone/main.py "Hello"
+```
